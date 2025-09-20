@@ -1,23 +1,15 @@
 use std::{borrow::Cow, sync::Arc};
-mod annotated;
-mod capabilities;
-mod content;
-mod extension;
-mod meta;
-mod prompt;
-mod resource;
-mod serde_impl;
-mod tool;
-pub use annotated::*;
-pub use capabilities::*;
-pub use content::*;
-pub use extension::*;
-pub use meta::*;
-pub use prompt::*;
-pub use resource::*;
-use serde::{Deserialize, Serialize, de::DeserializeOwned};
+pub mod model;
+pub use model::annotated::*;
+pub use model::capabilities::*;
+pub use model::content::*;
+pub use model::extension::*;
+pub use model::meta::*;
+pub use model::prompt::*;
+pub use model::resource::*;
+use serde::{de::DeserializeOwned, Deserialize, Serialize};
 use serde_json::Value;
-pub use tool::*;
+pub use model::tool::*;
 
 /// A JSON object type alias for convenient handling of JSON data.
 ///
@@ -43,7 +35,7 @@ pub fn object(value: serde_json::Value) -> JsonObject {
 #[macro_export]
 macro_rules! object {
     ({$($tt:tt)*}) => {
-        $crate::model::object(serde_json::json! {
+        $crate::object(serde_json::json! {
             {$($tt)*}
         })
     };
@@ -53,7 +45,7 @@ macro_rules! object {
 ///
 /// without returning any specific data.
 #[derive(Debug, Serialize, Deserialize, Clone, PartialEq, Copy, Eq)]
-#[cfg_attr(feature = "server", derive(schemars::JsonSchema))]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub struct EmptyObject {}
 
 pub trait ConstString: Default {
@@ -1473,7 +1465,7 @@ impl CallToolResult {
     /// ```
     pub fn structured(value: Value) -> Self {
         CallToolResult {
-            content: vec![Content::text(value.to_string())],
+            content: vec![],
             structured_content: Some(value),
             is_error: Some(false),
             meta: None,
@@ -1499,7 +1491,7 @@ impl CallToolResult {
     /// ```
     pub fn structured_error(value: Value) -> Self {
         CallToolResult {
-            content: vec![Content::text(value.to_string())],
+            content: vec![],
             structured_content: Some(value),
             is_error: Some(true),
             meta: None,
@@ -1516,22 +1508,11 @@ impl CallToolResult {
     where
         T: DeserializeOwned,
     {
-        let raw_text = match (self.structured_content, &self.content.first()) {
-            (Some(value), _) => return serde_json::from_value(value),
-            (None, Some(contents)) => {
-                if let Some(text) = contents.as_text() {
-                    let text = &text.text;
-                    Some(text)
-                } else {
-                    None
-                }
-            }
-            (None, None) => None,
-        };
-        if let Some(text) = raw_text {
-            return serde_json::from_str(text);
+        if let Some(value) = self.structured_content {
+            serde_json::from_value(value)
+        } else {
+            serde_json::from_value(serde_json::Value::Null)
         }
-        serde_json::from_value(serde_json::Value::Null)
     }
 }
 

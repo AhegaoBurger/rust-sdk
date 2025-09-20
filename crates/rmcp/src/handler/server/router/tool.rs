@@ -13,7 +13,7 @@ use crate::{
 pub struct ToolRoute<S> {
     #[allow(clippy::type_complexity)]
     pub call: Arc<DynCallToolHandler<S>>,
-    pub attr: crate::model::Tool,
+    pub attr: rmcp_types::model::Tool,
 }
 
 impl<S> std::fmt::Debug for ToolRoute<S> {
@@ -118,7 +118,7 @@ where
             attr: Tool::new(
                 name.into(),
                 "",
-                schema_for_type::<crate::model::JsonObject>(),
+                schema_for_type::<rmcp_types::model::JsonObject>(),
             ),
             call: self,
             _marker: std::marker::PhantomData,
@@ -130,7 +130,7 @@ pub struct WithToolAttr<C, S, A>
 where
     C: CallToolHandler<S, A> + Send + Sync + Clone + 'static,
 {
-    pub attr: crate::model::Tool,
+    pub attr: rmcp_types::model::Tool,
     pub call: C,
     pub _marker: std::marker::PhantomData<fn(S, A)>,
 }
@@ -158,7 +158,7 @@ where
         self
     }
     pub fn parameters_value(mut self, schema: serde_json::Value) -> Self {
-        self.attr.input_schema = crate::model::object(schema).into();
+        self.attr.input_schema = rmcp_types::model::object(schema).into();
         self
     }
     pub fn annotation(mut self, annotation: impl Into<ToolAnnotations>) -> Self {
@@ -248,7 +248,7 @@ where
         Ok(result)
     }
 
-    pub fn list_all(&self) -> Vec<crate::model::Tool> {
+    pub fn list_all(&self) -> Vec<rmcp_types::model::Tool> {
         self.map.values().map(|item| item.attr.clone()).collect()
     }
 }

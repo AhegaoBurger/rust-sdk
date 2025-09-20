@@ -3,9 +3,12 @@ use std::ops::{Deref, DerefMut};
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 
-use super::{
-    RawAudioContent, RawContent, RawEmbeddedResource, RawImageContent, RawResource,
-    RawResourceTemplate, RawTextContent, Role,
+use crate::{
+    model::content::{
+        RawAudioContent, RawContent, RawEmbeddedResource, RawImageContent, RawTextContent,
+    },
+    model::resource::{RawResource, RawResourceTemplate},
+    Role,
 };
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, Default)]

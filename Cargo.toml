@@ -1,10 +1,11 @@
 [workspace]
-members = ["crates/rmcp", "crates/rmcp-macros", "examples/*"]
+members = ["crates/rmcp", "crates/rmcp-macros", "crates/rmcp-types", "crates/rmcp-macros-core", "examples/*"]
 resolver = "2"
 
 [workspace.dependencies]
 rmcp = { version = "0.6.4", path = "./crates/rmcp" }
 rmcp-macros = { version = "0.6.4", path = "./crates/rmcp-macros" }
+rmcp-macros-core = { version = "0.6.4", path = "./crates/rmcp-macros-core" }
 
 [workspace.package]
 edition = "2024"

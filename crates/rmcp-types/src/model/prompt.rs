@@ -1,10 +1,12 @@
 use base64::engine::{Engine, general_purpose::STANDARD as BASE64_STANDARD};
 use serde::{Deserialize, Serialize};
 
-use super::{
-    AnnotateAble, Annotations, Icon, RawEmbeddedResource, RawImageContent,
-    content::{EmbeddedResource, ImageContent},
-    resource::ResourceContents,
+use crate::{
+    model::{
+        content::{EmbeddedResource, ImageContent, RawImageContent},
+        resource::{Resource, ResourceContents},
+    },
+    AnnotateAble, Annotations, Icon, RawEmbeddedResource, Role,
 };
 
 /// A prompt that can be used to generate text from a model
@@ -91,7 +93,7 @@ pub enum PromptMessageContent {
     /// A link to a resource that can be fetched separately
     ResourceLink {
         #[serde(flatten)]
-        link: super::resource::Resource,
+        link: Resource,
     },
 }
 
@@ -101,7 +103,7 @@ impl PromptMessageContent {
     }
 
     /// Create a resource link content
-    pub fn resource_link(resource: super::resource::Resource) -> Self {
+    pub fn resource_link(resource: Resource) -> Self {
         Self::ResourceLink { link: resource }
     }
 }
@@ -131,7 +133,7 @@ impl PromptMessage {
         role: PromptMessageRole,
         data: &[u8],
         mime_type: &str,
-        meta: Option<crate::model::Meta>,
+        meta: Option<crate::Meta>,
         annotations: Option<Annotations>,
     ) -> Self {
         let base64 = BASE64_STANDARD.encode(data);
@@ -154,8 +156,8 @@ impl PromptMessage {
         uri: String,
         mime_type: Option<String>,
         text: Option<String>,
-        resource_meta: Option<crate::model::Meta>,
-        resource_content_meta: Option<crate::model::Meta>,
+        resource_meta: Option<crate::Meta>,
+        resource_content_meta: Option<crate::Meta>,
         annotations: Option<Annotations>,
     ) -> Self {
         let resource_contents = match text {
@@ -189,13 +191,16 @@ impl PromptMessage {
     pub fn new_text_with_meta<S: Into<String>>(
         role: PromptMessageRole,
         text: S,
-        _meta: Option<crate::model::Meta>,
+        _meta: Option<crate::Meta>,
     ) -> Self {
         Self::new_text(role, text)
     }
 
     /// Create a new resource link message
-    pub fn new_resource_link(role: PromptMessageRole, resource: super::resource::Resource) -> Self {
+    pub fn new_resource_link(
+        role: PromptMessageRole,
+        resource: Resource,
+    ) -> Self {
         Self {
             role,
             content: PromptMessageContent::ResourceLink { link: resource },

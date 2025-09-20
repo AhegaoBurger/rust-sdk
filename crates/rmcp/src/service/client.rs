@@ -365,7 +365,7 @@ impl Peer<RoleClient> {
     /// A wrapper method for [`Peer<RoleClient>::list_tools`].
     ///
     /// This function will call [`Peer<RoleClient>::list_tools`] multiple times until all tools are listed.
-    pub async fn list_all_tools(&self) -> Result<Vec<crate::model::Tool>, ServiceError> {
+    pub async fn list_all_tools(&self) -> Result<Vec<rmcp_types::model::Tool>, ServiceError> {
         let mut tools = Vec::new();
         let mut cursor = None;
         loop {
@@ -384,7 +384,7 @@ impl Peer<RoleClient> {
     /// A wrapper method for [`Peer<RoleClient>::list_prompts`].
     ///
     /// This function will call [`Peer<RoleClient>::list_prompts`] multiple times until all prompts are listed.
-    pub async fn list_all_prompts(&self) -> Result<Vec<crate::model::Prompt>, ServiceError> {
+    pub async fn list_all_prompts(&self) -> Result<Vec<rmcp_types::model::Prompt>, ServiceError> {
         let mut prompts = Vec::new();
         let mut cursor = None;
         loop {
@@ -403,7 +403,7 @@ impl Peer<RoleClient> {
     /// A wrapper method for [`Peer<RoleClient>::list_resources`].
     ///
     /// This function will call [`Peer<RoleClient>::list_resources`] multiple times until all resources are listed.
-    pub async fn list_all_resources(&self) -> Result<Vec<crate::model::Resource>, ServiceError> {
+    pub async fn list_all_resources(&self) -> Result<Vec<rmcp_types::model::Resource>, ServiceError> {
         let mut resources = Vec::new();
         let mut cursor = None;
         loop {
@@ -424,7 +424,7 @@ impl Peer<RoleClient> {
     /// This function will call [`Peer<RoleClient>::list_resource_templates`] multiple times until all resource templates are listed.
     pub async fn list_all_resource_templates(
         &self,
-    ) -> Result<Vec<crate::model::ResourceTemplate>, ServiceError> {
+    ) -> Result<Vec<rmcp_types::model::ResourceTemplate>, ServiceError> {
         let mut resource_templates = Vec::new();
         let mut cursor = None;
         loop {

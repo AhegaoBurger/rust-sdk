@@ -4,9 +4,8 @@ use std::{any::TypeId, collections::HashMap, sync::Arc};
 
 use schemars::JsonSchema;
 
-use crate::{
-    RoleServer, model::JsonObject, schemars::generate::SchemaSettings, service::RequestContext,
-};
+use crate::{model::JsonObject, schemars::generate::SchemaSettings, service::RequestContext};
+use rmcp_types::model::RoleServer;
 
 /// A shortcut for generating a JSON schema for a type.
 pub fn schema_for_type<T: JsonSchema>() -> JsonObject {
@@ -75,7 +74,7 @@ where
     }
 }
 
-impl<C> FromContextPart<C> for crate::model::Extensions
+impl<C> FromContextPart<C> for rmcp_types::model::Extensions
 where
     C: AsRequestContext,
 {
@@ -107,7 +106,7 @@ where
     }
 }
 
-impl<C> FromContextPart<C> for crate::Peer<RoleServer>
+impl<C> FromContextPart<C> for crate::Peer<rmcp_types::model::RoleServer>
 where
     C: AsRequestContext,
 {
@@ -116,19 +115,19 @@ where
     }
 }
 
-impl<C> FromContextPart<C> for crate::model::Meta
+impl<C> FromContextPart<C> for rmcp_types::model::Meta
 where
     C: AsRequestContext,
 {
     fn from_context_part(context: &mut C) -> Result<Self, crate::ErrorData> {
         let request_context = context.as_request_context_mut();
-        let mut meta = crate::model::Meta::default();
+        let mut meta = rmcp_types::model::Meta::default();
         std::mem::swap(&mut meta, &mut request_context.meta);
         Ok(meta)
     }
 }
 
-pub struct RequestId(pub crate::model::RequestId);
+pub struct RequestId(pub rmcp_types::model::RequestId);
 
 impl<C> FromContextPart<C> for RequestId
 where
@@ -141,6 +140,6 @@ where
 
 /// Trait for types that can provide access to RequestContext
 pub trait AsRequestContext {
-    fn as_request_context(&self) -> &RequestContext<RoleServer>;
-    fn as_request_context_mut(&mut self) -> &mut RequestContext<RoleServer>;
+    fn as_request_context(&self) -> &RequestContext<rmcp_types::model::RoleServer>;
+    fn as_request_context_mut(&mut self) -> &mut RequestContext<rmcp_types::model::RoleServer>;
 }

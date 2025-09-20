@@ -3,7 +3,7 @@ use std::ops::{Deref, DerefMut};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
-use super::{
+use crate::{
     ClientNotification, ClientRequest, Extensions, JsonObject, JsonRpcMessage, NumberOrString,
     ProgressToken, ServerNotification, ServerRequest,
 };

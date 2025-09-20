@@ -1,0 +1,23 @@
+[package]
+name = "rmcp-macros-core"
+license = { workspace = true }
+version = { workspace = true }
+edition = { workspace = true }
+repository = { workspace = true }
+homepage = { workspace = true }
+readme = { workspace = true }
+description = "Core macros for the Model Context Protocol"
+documentation = "https://docs.rs/rmcp-macros-core"
+
+[dependencies]
+paste = { version = "1.0", optional = true }
+serde = { version = "1.0", features = ["derive", "rc"] }
+serde_json = "1.0"
+schemars = { version = "1.0", optional = true, features = ["chrono04"] }
+chrono = { version = "0.4.38", features = ["serde"] }
+base64 = { version = "0.22", optional = true }
+
+[features]
+default = ["base64"]
+schemars = ["dep:schemars"]
+paste = ["dep:paste"]

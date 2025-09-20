@@ -1,12 +1,13 @@
 use std::{borrow::Cow, sync::Arc};
 
+#[cfg(feature = "schemars")]
 use schemars::JsonSchema;
 /// Tools represent a routine that a server can execute
 /// Tool calls represent requests from the client to execute one
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
-use super::{Icon, JsonObject};
+use crate::{Icon, JsonObject};
 
 /// A tool that can be used by a model.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -158,18 +159,6 @@ impl Tool {
             annotations: Some(annotations),
             ..self
         }
-    }
-
-    /// Set the output schema using a type that implements JsonSchema
-    pub fn with_output_schema<T: JsonSchema + 'static>(mut self) -> Self {
-        self.output_schema = Some(crate::handler::server::tool::cached_schema_for_type::<T>());
-        self
-    }
-
-    /// Set the input schema using a type that implements JsonSchema
-    pub fn with_input_schema<T: JsonSchema + 'static>(mut self) -> Self {
-        self.input_schema = crate::handler::server::tool::cached_schema_for_type::<T>();
-        self
     }
 
     /// Get the schema as json value

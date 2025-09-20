@@ -10,7 +10,7 @@ use crate::{
 pub struct PromptRoute<S> {
     #[allow(clippy::type_complexity)]
     pub get: Arc<DynGetPromptHandler<S>>,
-    pub attr: crate::model::Prompt,
+    pub attr: rmcp_types::model::Prompt,
 }
 
 impl<S> std::fmt::Debug for PromptRoute<S> {
@@ -186,7 +186,7 @@ where
         (item.get)(context).await
     }
 
-    pub fn list_all(&self) -> Vec<crate::model::Prompt> {
+    pub fn list_all(&self) -> Vec<rmcp_types::model::Prompt> {
         self.map.values().map(|item| item.attr.clone()).collect()
     }
 }

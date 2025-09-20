@@ -2,7 +2,7 @@ use std::borrow::Cow;
 
 use serde::{Deserialize, Serialize};
 
-use super::{
+use crate::{
     Extensions, Meta, Notification, NotificationNoParam, Request, RequestNoParam,
     RequestOptionalParam,
 };

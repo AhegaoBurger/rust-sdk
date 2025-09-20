@@ -690,7 +690,7 @@ impl Peer<RoleServer> {
             .await?;
 
         match response.action {
-            crate::model::ElicitationAction::Accept => {
+            rmcp_types::model::ElicitationAction::Accept => {
                 if let Some(value) = response.content {
                     match serde_json::from_value::<T>(value.clone()) {
                         Ok(parsed) => Ok(Some(parsed)),
@@ -700,8 +700,8 @@ impl Peer<RoleServer> {
                     Err(ElicitationError::NoContent)
                 }
             }
-            crate::model::ElicitationAction::Decline => Err(ElicitationError::UserDeclined),
-            crate::model::ElicitationAction::Cancel => Err(ElicitationError::UserCancelled),
+            rmcp_types::model::ElicitationAction::Decline => Err(ElicitationError::UserDeclined),
+            rmcp_types::model::ElicitationAction::Cancel => Err(ElicitationError::UserCancelled),
         }
     }
 }

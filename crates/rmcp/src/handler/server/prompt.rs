@@ -12,11 +12,11 @@ use serde::de::DeserializeOwned;
 use super::common::{AsRequestContext, FromContextPart};
 pub use super::common::{Extension, RequestId};
 use crate::{
-    RoleServer,
     handler::server::wrapper::Parameters,
     model::{GetPromptResult, PromptMessage},
     service::RequestContext,
 };
+use rmcp_types::model::RoleServer;
 
 /// Context for prompt retrieval operations
 pub struct PromptContext<'a, S> {
@@ -324,7 +324,7 @@ impl_prompt_handler_for!(T0 T1 T2 T3 T4 T5 T6 T7 T8 T9 T10 T11 T12 T13 T14 T15);
 /// This function analyzes the schema of a type and extracts the properties
 /// as PromptArgument entries with name, description, and required status
 pub fn cached_arguments_from_schema<T: schemars::JsonSchema + std::any::Any>()
--> Option<Vec<crate::model::PromptArgument>> {
+-> Option<Vec<rmcp_types::model::PromptArgument>> {
     let schema = super::common::cached_schema_for_type::<T>();
     let schema_value = serde_json::Value::Object((*schema).clone());
 
@@ -348,7 +348,7 @@ pub fn cached_arguments_from_schema<T: schemars::JsonSchema + std::any::Any>()
                 .and_then(|d| d.as_str())
                 .map(|s| s.to_string());
 
-            arguments.push(crate::model::PromptArgument {
+            arguments.push(rmcp_types::model::PromptArgument {
                 name: name.clone(),
                 title: None,
                 description,

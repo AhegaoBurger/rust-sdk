@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-use super::{Annotated, Icon, Meta};
+use crate::{Annotated, Icon, Meta};
 
 /// Represents a resource in the extension with metadata
 #[derive(Debug, Serialize, Deserialize, Clone, PartialEq)]

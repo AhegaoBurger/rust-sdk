@@ -352,7 +352,7 @@ impl LocalSessionWorker {
         request: &JsonRpcRequest<ClientRequest>,
         http_request_id: HttpRequestId,
     ) {
-        use crate::model::GetMeta;
+        use rmcp_types::model::GetMeta;
         self.register_resource(
             ResourceKey::McpRequestId(request.id.clone()),
             http_request_id,
@@ -783,11 +783,11 @@ impl Worker for LocalSessionWorker {
                 InnerEvent::FromHandler(WorkerSendRequest { message, responder }) => {
                     // catch response
                     let to_unregister = match &message {
-                        crate::model::JsonRpcMessage::Response(json_rpc_response) => {
+                        rmcp_types::model::JsonRpcMessage::Response(json_rpc_response) => {
                             let request_id = json_rpc_response.id.clone();
                             Some(ResourceKey::McpRequestId(request_id))
                         }
-                        crate::model::JsonRpcMessage::Error(json_rpc_error) => {
+                        rmcp_types::model::JsonRpcMessage::Error(json_rpc_error) => {
                             let request_id = json_rpc_error.id.clone();
                             Some(ResourceKey::McpRequestId(request_id))
                         }
@@ -812,12 +812,12 @@ impl Worker for LocalSessionWorker {
                     http_request_id,
                 }) => {
                     match &json_rpc_message {
-                        crate::model::JsonRpcMessage::Request(request) => {
+                        rmcp_types::model::JsonRpcMessage::Request(request) => {
                             if let Some(http_request_id) = http_request_id {
                                 self.register_request(request, http_request_id)
                             }
                         }
-                        crate::model::JsonRpcMessage::Notification(notification) => {
+                        rmcp_types::model::JsonRpcMessage::Notification(notification) => {
                             self.catch_cancellation_notification(notification)
                         }
                         _ => {}
