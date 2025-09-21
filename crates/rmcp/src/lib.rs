@@ -139,6 +139,7 @@ pub use error::{Error, ErrorData, RmcpError};
 
 /// Basic data types in MCP specification
 pub use rmcp_types as model;
+pub use rmcp_types;
 #[cfg(any(feature = "client", feature = "server"))]
 #[cfg_attr(docsrs, doc(cfg(any(feature = "client", feature = "server"))))]
 pub mod service;

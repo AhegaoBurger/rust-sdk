@@ -1,4 +1,4 @@
-use std::{borrow::Cow, fmt::Display};
+use std::borrow::Cow;
 
 use crate::ServiceError;
 pub use rmcp_types::ErrorData;
@@ -6,17 +6,6 @@ pub use rmcp_types::ErrorData;
     note = "Use `rmcp::ErrorData` instead, `rmcp::ErrorData` could become `RmcpError` in the future."
 )]
 pub type Error = ErrorData;
-impl Display for ErrorData {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}: {}", self.code.0, self.message)?;
-        if let Some(data) = &self.data {
-            write!(f, "({})", data)?;
-        }
-        Ok(())
-    }
-}
-
-impl std::error::Error for ErrorData {}
 
 /// This is an unified error type for the errors could be returned by the service.
 #[derive(Debug, thiserror::Error)]

@@ -41,9 +41,8 @@ impl<T: Serialize + JsonSchema + 'static> IntoCallToolResult for Json<T> {
     }
 }
 
-// Implementation for Result<Json<T>, E>
-impl<T: Serialize + JsonSchema + 'static, E: IntoContents> IntoCallToolResult
-    for Result<Json<T>, E>
+// Implementation for Result<Json<T>, E> - specific to Json wrapper types
+impl<T: Serialize + JsonSchema + 'static> IntoCallToolResult for Result<Json<T>, String>
 {
     fn into_call_tool_result(self) -> Result<CallToolResult, crate::ErrorData> {
         match self {

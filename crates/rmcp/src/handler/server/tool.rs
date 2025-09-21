@@ -15,7 +15,7 @@ pub use super::{
 use crate::{
     RoleServer,
     handler::server::wrapper::Parameters,
-    model::{CallToolRequestParam, CallToolResult, IntoContents, JsonObject},
+    model::{CallToolRequestParam, CallToolResult, Content, IntoContents, JsonObject},
     service::RequestContext,
 };
 
@@ -70,29 +70,52 @@ pub trait IntoCallToolResult {
     fn into_call_tool_result(self) -> Result<CallToolResult, crate::ErrorData>;
 }
 
-impl<T: IntoContents> IntoCallToolResult for T {
+// Specific implementations for common types that should convert to CallToolResult
+impl IntoCallToolResult for String {
     fn into_call_tool_result(self) -> Result<CallToolResult, crate::ErrorData> {
         Ok(CallToolResult::success(self.into_contents()))
     }
 }
 
-impl<T: IntoContents, E: IntoContents> IntoCallToolResult for Result<T, E> {
+impl IntoCallToolResult for &'static str {
+    fn into_call_tool_result(self) -> Result<CallToolResult, crate::ErrorData> {
+        Ok(CallToolResult::success(self.to_string().into_contents()))
+    }
+}
+
+impl IntoCallToolResult for Vec<Content> {
+    fn into_call_tool_result(self) -> Result<CallToolResult, crate::ErrorData> {
+        Ok(CallToolResult::success(self))
+    }
+}
+
+impl IntoCallToolResult for Content {
+    fn into_call_tool_result(self) -> Result<CallToolResult, crate::ErrorData> {
+        Ok(CallToolResult::success(self.into_contents()))
+    }
+}
+
+// Specific Result implementations for common success/error patterns  
+// Note: This excludes ErrorData to avoid conflicts
+impl IntoCallToolResult for Result<String, String> {
     fn into_call_tool_result(self) -> Result<CallToolResult, crate::ErrorData> {
         match self {
-            Ok(value) => Ok(CallToolResult::success(value.into_contents())),
+            Ok(value) => value.into_call_tool_result(),
             Err(error) => Ok(CallToolResult::error(error.into_contents())),
         }
     }
 }
 
-impl<T: IntoCallToolResult> IntoCallToolResult for Result<T, crate::ErrorData> {
+impl IntoCallToolResult for Result<Content, String> {
     fn into_call_tool_result(self) -> Result<CallToolResult, crate::ErrorData> {
         match self {
             Ok(value) => value.into_call_tool_result(),
-            Err(error) => Err(error),
+            Err(error) => Ok(CallToolResult::error(error.into_contents())),
         }
     }
 }
+
+// Removed Result<T, ErrorData> implementation to avoid conflicts with Json wrapper
 
 pin_project_lite::pin_project! {
     #[project = IntoCallToolResultFutProj]
@@ -129,11 +152,6 @@ where
     }
 }
 
-impl IntoCallToolResult for Result<CallToolResult, crate::ErrorData> {
-    fn into_call_tool_result(self) -> Result<CallToolResult, crate::ErrorData> {
-        self
-    }
-}
 
 pub trait CallToolHandler<S, A> {
     fn call(

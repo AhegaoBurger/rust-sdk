@@ -4,7 +4,7 @@ use futures::future::BoxFuture;
 
 use crate::{
     handler::server::prompt::{DynGetPromptHandler, GetPromptHandler, PromptContext},
-    rmcp_types::{GetPromptResult, Prompt},
+    model::{GetPromptResult, Prompt},
 };
 
 pub struct PromptRoute<S> {

@@ -2,7 +2,7 @@ use std::{collections::BTreeMap, marker::PhantomData};
 
 use serde::{Deserialize, Serialize};
 
-#[cfg(feature = "paste")]
+#[cfg(feature = "builders")]
 use paste::paste;
 
 use crate::JsonObject;
@@ -113,7 +113,7 @@ pub struct ServerCapabilities {
     pub tools: Option<ToolsCapability>,
 }
 
-#[cfg(feature = "paste")]
+#[cfg(feature = "builders")]
 macro_rules! builder {
     ($Target: ident {$($f: ident: $T: ty),* $(,)?}) => {
         paste! {
@@ -219,7 +219,7 @@ macro_rules! builder {
     }
 }
 
-#[cfg(feature = "paste")]
+#[cfg(feature = "builders")]
 builder! {
     ServerCapabilities {
         experimental: ExperimentalCapabilities,
@@ -231,7 +231,7 @@ builder! {
     }
 }
 
-#[cfg(feature = "paste")]
+#[cfg(feature = "builders")]
 impl<const E: bool, const L: bool, const C: bool, const P: bool, const R: bool>
     ServerCapabilitiesBuilder<ServerCapabilitiesBuilderState<E, L, C, P, R, true>>
 {
@@ -243,7 +243,7 @@ impl<const E: bool, const L: bool, const C: bool, const P: bool, const R: bool>
     }
 }
 
-#[cfg(feature = "paste")]
+#[cfg(feature = "builders")]
 impl<const E: bool, const L: bool, const C: bool, const R: bool, const T: bool>
     ServerCapabilitiesBuilder<ServerCapabilitiesBuilderState<E, L, C, true, R, T>>
 {
@@ -255,7 +255,7 @@ impl<const E: bool, const L: bool, const C: bool, const R: bool, const T: bool>
     }
 }
 
-#[cfg(feature = "paste")]
+#[cfg(feature = "builders")]
 impl<const E: bool, const L: bool, const C: bool, const P: bool, const T: bool>
     ServerCapabilitiesBuilder<ServerCapabilitiesBuilderState<E, L, C, P, true, T>>
 {
@@ -274,7 +274,7 @@ impl<const E: bool, const L: bool, const C: bool, const P: bool, const T: bool>
     }
 }
 
-#[cfg(feature = "paste")]
+#[cfg(feature = "builders")]
 builder! {
     ClientCapabilities{
         experimental: ExperimentalCapabilities,
@@ -284,7 +284,7 @@ builder! {
     }
 }
 
-#[cfg(feature = "paste")]
+#[cfg(feature = "builders")]
 impl<const E: bool, const S: bool>
     ClientCapabilitiesBuilder<ClientCapabilitiesBuilderState<E, true, S>>
 {
@@ -296,7 +296,7 @@ impl<const E: bool, const S: bool>
     }
 }
 
-#[cfg(all(feature = "elicitation", feature = "paste"))]
+#[cfg(all(feature = "elicitation", feature = "builders"))]
 impl<const E: bool, const R: bool, const S: bool>
     ClientCapabilitiesBuilder<ClientCapabilitiesBuilderState<E, R, S, true>>
 {
