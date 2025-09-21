@@ -4,6 +4,7 @@
 //!
 //! - Original code license: <https://github.com/hyperium/http/blob/master/LICENSE-MIT>
 //! - Original code: <https://github.com/hyperium/http/blob/master/src/extensions.rs>
+use serde::{Deserialize, Serialize};
 use std::{
     any::{Any, TypeId},
     collections::HashMap,
@@ -39,10 +40,11 @@ impl Hasher for IdHasher {
 ///
 /// `Extensions` can be used by `Request` `Notification` and `Response` to store
 /// extra data derived from the underlying protocol.
-#[derive(Clone, Default)]
+#[derive(Clone, Default, Serialize, Deserialize)]
 pub struct Extensions {
     // If extensions are never used, no need to carry around an empty HashMap.
     // That's 3 words. Instead, this is only 1 word.
+    #[serde(skip)]
     map: Option<Box<AnyMap>>,
 }
 

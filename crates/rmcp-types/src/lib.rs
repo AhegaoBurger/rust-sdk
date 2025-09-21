@@ -1,23 +1,9 @@
 use std::{borrow::Cow, sync::Arc};
-mod annotated;
-mod capabilities;
-mod content;
-mod extension;
-mod meta;
-mod prompt;
-mod resource;
-mod serde_impl;
-mod tool;
-pub use annotated::*;
-pub use capabilities::*;
-pub use content::*;
-pub use extension::*;
-pub use meta::*;
-pub use prompt::*;
-pub use resource::*;
 use serde::{Deserialize, Serialize, de::DeserializeOwned};
 use serde_json::Value;
-pub use tool::*;
+
+pub mod model;
+pub use model::*;
 
 /// A JSON object type alias for convenient handling of JSON data.
 ///
@@ -43,7 +29,7 @@ pub fn object(value: serde_json::Value) -> JsonObject {
 #[macro_export]
 macro_rules! object {
     ({$($tt:tt)*}) => {
-        $crate::model::object(serde_json::json! {
+        $crate::object(serde_json::json! {
             {$($tt)*}
         })
     };
@@ -53,7 +39,7 @@ macro_rules! object {
 ///
 /// without returning any specific data.
 #[derive(Debug, Serialize, Deserialize, Clone, PartialEq, Copy, Eq)]
-#[cfg_attr(feature = "server", derive(schemars::JsonSchema))]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub struct EmptyObject {}
 
 pub trait ConstString: Default {
@@ -292,7 +278,7 @@ pub struct ProgressToken(pub NumberOrString);
 /// - `method`: The name of the method being called
 /// - `params`: The parameters for the method
 /// - `extensions`: Additional context data (similar to HTTP headers)
-#[derive(Debug, Clone, Default)]
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub struct Request<M = String, P = JsonObject> {
     pub method: M,
@@ -323,7 +309,7 @@ impl<M, P> GetExtensions for Request<M, P> {
     }
 }
 
-#[derive(Debug, Clone, Default)]
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub struct RequestOptionalParam<M = String, P = JsonObject> {
     pub method: M,
@@ -346,7 +332,7 @@ impl<M: Default, P> RequestOptionalParam<M, P> {
     }
 }
 
-#[derive(Debug, Clone, Default)]
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub struct RequestNoParam<M = String> {
     pub method: M,
@@ -365,7 +351,7 @@ impl<M> GetExtensions for RequestNoParam<M> {
         &mut self.extensions
     }
 }
-#[derive(Debug, Clone, Default)]
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub struct Notification<M = String, P = JsonObject> {
     pub method: M,
@@ -387,7 +373,7 @@ impl<M: Default, P> Notification<M, P> {
     }
 }
 
-#[derive(Debug, Clone, Default)]
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub struct NotificationNoParam<M = String> {
     pub method: M,

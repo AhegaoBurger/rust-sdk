@@ -3,9 +3,9 @@ use std::ops::{Deref, DerefMut};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
-use super::{
-    ClientNotification, ClientRequest, Extensions, JsonObject, JsonRpcMessage, NumberOrString,
-    ProgressToken, ServerNotification, ServerRequest,
+use crate::{
+    model::Extensions, ClientNotification, ClientRequest, JsonObject, JsonRpcMessage,
+    NumberOrString, ProgressToken, ServerNotification, ServerRequest,
 };
 
 pub trait GetMeta {

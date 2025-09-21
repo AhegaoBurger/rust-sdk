@@ -5,7 +5,7 @@ use std::{any::TypeId, collections::HashMap, sync::Arc};
 use schemars::JsonSchema;
 
 use crate::{
-    RoleServer, model::JsonObject, schemars::generate::SchemaSettings, service::RequestContext,
+    RoleServer, rmcp_types::JsonObject, schemars::generate::SchemaSettings, service::RequestContext,
 };
 
 /// A shortcut for generating a JSON schema for a type.
@@ -75,7 +75,7 @@ where
     }
 }
 
-impl<C> FromContextPart<C> for crate::model::Extensions
+impl<C> FromContextPart<C> for rmcp_types::Extensions
 where
     C: AsRequestContext,
 {
@@ -116,19 +116,19 @@ where
     }
 }
 
-impl<C> FromContextPart<C> for crate::model::Meta
+impl<C> FromContextPart<C> for rmcp_types::Meta
 where
     C: AsRequestContext,
 {
     fn from_context_part(context: &mut C) -> Result<Self, crate::ErrorData> {
         let request_context = context.as_request_context_mut();
-        let mut meta = crate::model::Meta::default();
+        let mut meta = rmcp_types::Meta::default();
         std::mem::swap(&mut meta, &mut request_context.meta);
         Ok(meta)
     }
 }
 
-pub struct RequestId(pub crate::model::RequestId);
+pub struct RequestId(pub rmcp_types::RequestId);
 
 impl<C> FromContextPart<C> for RequestId
 where

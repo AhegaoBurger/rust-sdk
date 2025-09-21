@@ -44,7 +44,7 @@ where
     async fn post_message(
         &self,
         uri: std::sync::Arc<str>,
-        message: crate::model::ClientJsonRpcMessage,
+        message: rmcp_types::ClientJsonRpcMessage,
         session_id: Option<std::sync::Arc<str>>,
         mut auth_token: Option<String>,
     ) -> Result<

@@ -4,7 +4,7 @@
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 
-use super::{AnnotateAble, Annotated, resource::ResourceContents};
+use crate::{model::{resource::ResourceContents, AnnotateAble, Annotated}};
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -13,7 +13,7 @@ pub struct RawTextContent {
     pub text: String,
     /// Optional protocol-level metadata for this content block
     #[serde(rename = "_meta", skip_serializing_if = "Option::is_none")]
-    pub meta: Option<super::Meta>,
+    pub meta: Option<crate::model::Meta>,
 }
 pub type TextContent = Annotated<RawTextContent>;
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -25,7 +25,7 @@ pub struct RawImageContent {
     pub mime_type: String,
     /// Optional protocol-level metadata for this content block
     #[serde(rename = "_meta", skip_serializing_if = "Option::is_none")]
-    pub meta: Option<super::Meta>,
+    pub meta: Option<crate::model::Meta>,
 }
 
 pub type ImageContent = Annotated<RawImageContent>;
@@ -35,7 +35,7 @@ pub type ImageContent = Annotated<RawImageContent>;
 pub struct RawEmbeddedResource {
     /// Optional protocol-level metadata for this content block
     #[serde(rename = "_meta", skip_serializing_if = "Option::is_none")]
-    pub meta: Option<super::Meta>,
+    pub meta: Option<crate::model::Meta>,
     pub resource: ResourceContents,
 }
 pub type EmbeddedResource = Annotated<RawEmbeddedResource>;
@@ -67,7 +67,7 @@ pub enum RawContent {
     Image(RawImageContent),
     Resource(RawEmbeddedResource),
     Audio(RawAudioContent),
-    ResourceLink(super::resource::RawResource),
+    ResourceLink(crate::model::resource::RawResource),
 }
 
 pub type Content = Annotated<RawContent>;
@@ -144,7 +144,7 @@ impl RawContent {
     }
 
     /// Get the resource link if this is a ResourceLink variant
-    pub fn as_resource_link(&self) -> Option<&super::resource::RawResource> {
+    pub fn as_resource_link(&self) -> Option<&crate::model::resource::RawResource> {
         match self {
             RawContent::ResourceLink(link) => Some(link),
             _ => None,
@@ -152,7 +152,7 @@ impl RawContent {
     }
 
     /// Create a resource link content
-    pub fn resource_link(resource: super::resource::RawResource) -> Self {
+    pub fn resource_link(resource: crate::model::resource::RawResource) -> Self {
         RawContent::ResourceLink(resource)
     }
 }
@@ -179,7 +179,7 @@ impl Content {
     }
 
     /// Create a resource link content
-    pub fn resource_link(resource: super::resource::RawResource) -> Self {
+    pub fn resource_link(resource: crate::model::resource::RawResource) -> Self {
         RawContent::resource_link(resource).no_annotation()
     }
 }
@@ -248,7 +248,7 @@ mod tests {
 
     #[test]
     fn test_resource_link_serialization() {
-        use super::super::resource::RawResource;
+        use crate::model::resource::RawResource;
 
         let resource_link = RawContent::ResourceLink(RawResource {
             uri: "file:///test.txt".to_string(),

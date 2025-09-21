@@ -13,7 +13,7 @@ where
     async fn post_message(
         &self,
         uri: Uri,
-        message: crate::model::ClientJsonRpcMessage,
+        message: rmcp_types::ClientJsonRpcMessage,
         mut auth_token: Option<String>,
     ) -> Result<(), SseTransportError<Self::Error>> {
         if auth_token.is_none() {

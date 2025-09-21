@@ -12,7 +12,7 @@ mod tool_router;
 ///
 /// This macro is used to mark a function as a tool handler.
 ///
-/// This will generate a function that return the attribute of this tool, with type `rmcp::model::Tool`.
+/// This will generate a function that return the attribute of this tool, with type `rmcp_types::Tool`.
 ///
 /// ## Usage
 ///
@@ -169,7 +169,7 @@ pub fn tool_handler(attr: TokenStream, input: TokenStream) -> TokenStream {
 ///
 /// This macro is used to mark a function as a prompt handler.
 ///
-/// This will generate a function that returns the attribute of this prompt, with type `rmcp::model::Prompt`.
+/// This will generate a function that returns the attribute of this prompt, with type `rmcp_types::Prompt`.
 ///
 /// ## Usage
 ///

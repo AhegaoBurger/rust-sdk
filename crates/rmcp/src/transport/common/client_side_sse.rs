@@ -8,7 +8,7 @@ use std::{
 use futures::{Stream, stream::BoxStream};
 use sse_stream::{Error as SseError, Sse};
 
-use crate::model::ServerJsonRpcMessage;
+use rmcp_types::ServerJsonRpcMessage;
 
 pub type BoxedSseResponse = BoxStream<'static, Result<Sse, SseError>>;
 

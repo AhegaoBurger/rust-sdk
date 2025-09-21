@@ -3,7 +3,7 @@ use std::ops::{Deref, DerefMut};
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 
-use super::{
+use crate::{
     RawAudioContent, RawContent, RawEmbeddedResource, RawImageContent, RawResource,
     RawResourceTemplate, RawTextContent, Role,
 };

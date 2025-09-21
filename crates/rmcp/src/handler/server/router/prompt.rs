@@ -4,13 +4,13 @@ use futures::future::BoxFuture;
 
 use crate::{
     handler::server::prompt::{DynGetPromptHandler, GetPromptHandler, PromptContext},
-    model::{GetPromptResult, Prompt},
+    rmcp_types::{GetPromptResult, Prompt},
 };
 
 pub struct PromptRoute<S> {
     #[allow(clippy::type_complexity)]
     pub get: Arc<DynGetPromptHandler<S>>,
-    pub attr: crate::model::Prompt,
+    pub attr: rmcp_types::Prompt,
 }
 
 impl<S> std::fmt::Debug for PromptRoute<S> {
@@ -186,7 +186,7 @@ where
         (item.get)(context).await
     }
 
-    pub fn list_all(&self) -> Vec<crate::model::Prompt> {
+    pub fn list_all(&self) -> Vec<rmcp_types::Prompt> {
         self.map.values().map(|item| item.attr.clone()).collect()
     }
 }

@@ -3,12 +3,12 @@ use thiserror::Error;
 
 use crate::{
     error::ErrorData as McpError,
-    model::{
-        CancelledNotification, CancelledNotificationParam, Extensions, GetExtensions, GetMeta,
-        JsonRpcError, JsonRpcMessage, JsonRpcNotification, JsonRpcRequest, JsonRpcResponse, Meta,
-        NumberOrString, ProgressToken, RequestId, ServerJsonRpcMessage,
-    },
     transport::{DynamicTransportError, IntoTransport, Transport},
+};
+use rmcp_types::{
+    CancelledNotification, CancelledNotificationParam, Extensions, GetExtensions, GetMeta,
+    JsonRpcError, JsonRpcMessage, JsonRpcNotification, JsonRpcRequest, JsonRpcResponse, Meta,
+    NumberOrString, ProgressToken, RequestId, ServerJsonRpcMessage,
 };
 #[cfg(feature = "client")]
 #[cfg_attr(docsrs, doc(cfg(feature = "client")))]
@@ -264,7 +264,7 @@ impl<R: ServiceRole> RequestHandle<R> {
                             request_id: self.id,
                             reason: Some(Self::REQUEST_TIMEOUT_REASON.to_owned()),
                         },
-                        method: crate::model::CancelledNotificationMethod,
+                        method: rmcp_types::CancelledNotificationMethod,
                         extensions: Default::default(),
                     };
                     let _ = self.peer.send_notification(notification.into()).await;
@@ -283,7 +283,7 @@ impl<R: ServiceRole> RequestHandle<R> {
                 request_id: self.id,
                 reason,
             },
-            method: crate::model::CancelledNotificationMethod,
+            method: rmcp_types::CancelledNotificationMethod,
             extensions: Default::default(),
         };
         self.peer.send_notification(notification.into()).await?;

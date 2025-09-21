@@ -4,11 +4,11 @@ use thiserror::Error;
 
 use super::*;
 #[cfg(feature = "elicitation")]
-use crate::model::{
+use rmcp_types::{
     CreateElicitationRequest, CreateElicitationRequestParam, CreateElicitationResult,
 };
 use crate::{
-    model::{
+    rmcp_types::{
         CancelledNotification, CancelledNotificationParam, ClientInfo, ClientJsonRpcMessage,
         ClientNotification, ClientRequest, ClientResult, CreateMessageRequest,
         CreateMessageRequestParam, CreateMessageResult, ErrorData, ListRootsRequest,
@@ -690,7 +690,7 @@ impl Peer<RoleServer> {
             .await?;
 
         match response.action {
-            crate::model::ElicitationAction::Accept => {
+            rmcp_types::ElicitationAction::Accept => {
                 if let Some(value) = response.content {
                     match serde_json::from_value::<T>(value.clone()) {
                         Ok(parsed) => Ok(Some(parsed)),
@@ -700,8 +700,8 @@ impl Peer<RoleServer> {
                     Err(ElicitationError::NoContent)
                 }
             }
-            crate::model::ElicitationAction::Decline => Err(ElicitationError::UserDeclined),
-            crate::model::ElicitationAction::Cancel => Err(ElicitationError::UserCancelled),
+            rmcp_types::ElicitationAction::Decline => Err(ElicitationError::UserDeclined),
+            rmcp_types::ElicitationAction::Cancel => Err(ElicitationError::UserCancelled),
         }
     }
 }

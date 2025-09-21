@@ -4,7 +4,7 @@ use futures::{Stream, StreamExt};
 use tokio::sync::RwLock;
 use tokio_stream::wrappers::ReceiverStream;
 
-use crate::model::{ProgressNotificationParam, ProgressToken};
+use rmcp_types::{ProgressNotificationParam, ProgressToken};
 type Dispatcher =
     Arc<RwLock<HashMap<ProgressToken, tokio::sync::mpsc::Sender<ProgressNotificationParam>>>>;
 

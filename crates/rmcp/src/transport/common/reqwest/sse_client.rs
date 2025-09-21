@@ -23,7 +23,7 @@ impl SseClient for reqwest::Client {
     async fn post_message(
         &self,
         uri: Uri,
-        message: crate::model::ClientJsonRpcMessage,
+        message: rmcp_types::ClientJsonRpcMessage,
         auth_token: Option<String>,
     ) -> Result<(), SseTransportError<Self::Error>> {
         let mut request_builder = self.post(uri.to_string()).json(&message);

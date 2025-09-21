@@ -8,7 +8,7 @@ use http_body_util::{BodyExt, Empty, Full, combinators::BoxBody};
 use sse_stream::{KeepAlive, Sse, SseBody};
 
 use super::http_header::EVENT_STREAM_MIME_TYPE;
-use crate::model::{ClientJsonRpcMessage, ServerJsonRpcMessage};
+use rmcp_types::{ClientJsonRpcMessage, ServerJsonRpcMessage};
 
 pub type SessionId = Arc<str>;
 

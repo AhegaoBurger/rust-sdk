@@ -1,10 +1,13 @@
 use base64::engine::{Engine, general_purpose::STANDARD as BASE64_STANDARD};
 use serde::{Deserialize, Serialize};
 
-use super::{
-    AnnotateAble, Annotations, Icon, RawEmbeddedResource, RawImageContent,
-    content::{EmbeddedResource, ImageContent},
-    resource::ResourceContents,
+use crate::{
+    model::{
+        content::{EmbeddedResource, ImageContent},
+        resource::ResourceContents,
+        AnnotateAble, Annotations,
+    },
+    Icon, RawEmbeddedResource, RawImageContent,
 };
 
 /// A prompt that can be used to generate text from a model
@@ -91,7 +94,7 @@ pub enum PromptMessageContent {
     /// A link to a resource that can be fetched separately
     ResourceLink {
         #[serde(flatten)]
-        link: super::resource::Resource,
+        link: crate::model::resource::Resource,
     },
 }
 
@@ -101,7 +104,7 @@ impl PromptMessageContent {
     }
 
     /// Create a resource link content
-    pub fn resource_link(resource: super::resource::Resource) -> Self {
+    pub fn resource_link(resource: crate::model::resource::Resource) -> Self {
         Self::ResourceLink { link: resource }
     }
 }
@@ -195,7 +198,10 @@ impl PromptMessage {
     }
 
     /// Create a new resource link message
-    pub fn new_resource_link(role: PromptMessageRole, resource: super::resource::Resource) -> Self {
+    pub fn new_resource_link(
+        role: PromptMessageRole,
+        resource: crate::model::resource::Resource,
+    ) -> Self {
         Self {
             role,
             content: PromptMessageContent::ResourceLink { link: resource },
@@ -227,7 +233,7 @@ mod tests {
 
     #[test]
     fn test_prompt_message_resource_link_serialization() {
-        use super::super::resource::RawResource;
+        use crate::model::resource::RawResource;
 
         let resource = RawResource::new("file:///test.txt", "test.txt");
         let message =

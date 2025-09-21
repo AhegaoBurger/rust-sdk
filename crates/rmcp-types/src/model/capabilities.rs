@@ -1,9 +1,11 @@
 use std::{collections::BTreeMap, marker::PhantomData};
 
-use paste::paste;
 use serde::{Deserialize, Serialize};
 
-use super::JsonObject;
+#[cfg(feature = "paste")]
+use paste::paste;
+
+use crate::JsonObject;
 pub type ExperimentalCapabilities = BTreeMap<String, JsonObject>;
 
 #[derive(Debug, Serialize, Deserialize, Clone, PartialEq, Default)]
@@ -59,7 +61,7 @@ pub struct ElicitationCapability {
 ///
 /// # Builder
 /// ```rust
-/// # use rmcp::model::ClientCapabilities;
+/// # use rmcp_types::model::ClientCapabilities;
 /// let cap = ClientCapabilities::builder()
 ///     .enable_experimental()
 ///     .enable_roots()
@@ -83,7 +85,7 @@ pub struct ClientCapabilities {
 ///
 /// ## Builder
 /// ```rust
-/// # use rmcp::model::ServerCapabilities;
+/// # use rmcp_types::model::ServerCapabilities;
 /// let cap = ServerCapabilities::builder()
 ///     .enable_logging()
 ///     .enable_experimental()
@@ -111,6 +113,7 @@ pub struct ServerCapabilities {
     pub tools: Option<ToolsCapability>,
 }
 
+#[cfg(feature = "paste")]
 macro_rules! builder {
     ($Target: ident {$($f: ident: $T: ty),* $(,)?}) => {
         paste! {
@@ -216,6 +219,7 @@ macro_rules! builder {
     }
 }
 
+#[cfg(feature = "paste")]
 builder! {
     ServerCapabilities {
         experimental: ExperimentalCapabilities,
@@ -227,6 +231,7 @@ builder! {
     }
 }
 
+#[cfg(feature = "paste")]
 impl<const E: bool, const L: bool, const C: bool, const P: bool, const R: bool>
     ServerCapabilitiesBuilder<ServerCapabilitiesBuilderState<E, L, C, P, R, true>>
 {
@@ -238,6 +243,7 @@ impl<const E: bool, const L: bool, const C: bool, const P: bool, const R: bool>
     }
 }
 
+#[cfg(feature = "paste")]
 impl<const E: bool, const L: bool, const C: bool, const R: bool, const T: bool>
     ServerCapabilitiesBuilder<ServerCapabilitiesBuilderState<E, L, C, true, R, T>>
 {
@@ -249,6 +255,7 @@ impl<const E: bool, const L: bool, const C: bool, const R: bool, const T: bool>
     }
 }
 
+#[cfg(feature = "paste")]
 impl<const E: bool, const L: bool, const C: bool, const P: bool, const T: bool>
     ServerCapabilitiesBuilder<ServerCapabilitiesBuilderState<E, L, C, P, true, T>>
 {
@@ -267,6 +274,7 @@ impl<const E: bool, const L: bool, const C: bool, const P: bool, const T: bool>
     }
 }
 
+#[cfg(feature = "paste")]
 builder! {
     ClientCapabilities{
         experimental: ExperimentalCapabilities,
@@ -276,6 +284,7 @@ builder! {
     }
 }
 
+#[cfg(feature = "paste")]
 impl<const E: bool, const S: bool>
     ClientCapabilitiesBuilder<ClientCapabilitiesBuilderState<E, true, S>>
 {
@@ -287,7 +296,7 @@ impl<const E: bool, const S: bool>
     }
 }
 
-#[cfg(feature = "elicitation")]
+#[cfg(all(feature = "elicitation", feature = "paste"))]
 impl<const E: bool, const R: bool, const S: bool>
     ClientCapabilitiesBuilder<ClientCapabilitiesBuilderState<E, R, S, true>>
 {

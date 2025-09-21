@@ -10,7 +10,7 @@ use tokio_stream::wrappers::ReceiverStream;
 use super::session::SessionManager;
 use crate::{
     RoleServer,
-    model::{ClientJsonRpcMessage, ClientRequest, GetExtensions},
+    rmcp_types::{ClientJsonRpcMessage, ClientRequest, GetExtensions},
     serve_server,
     service::serve_directly,
     transport::{
@@ -48,7 +48,7 @@ impl Default for StreamableHttpServerConfig {
 ///
 /// ## Extract information from raw http request
 ///
-/// The http service will consume the request body, however the rest part will be remain and injected into [`crate::model::Extensions`],
+/// The http service will consume the request body, however the rest part will be remain and injected into [`rmcp_types::Extensions`],
 /// which you can get from [`crate::service::RequestContext`].
 /// ```rust
 /// use rmcp::handler::server::tool::Extension;

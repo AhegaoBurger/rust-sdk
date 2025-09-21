@@ -1,7 +1,7 @@
 use std::{borrow::Cow, fmt::Display};
 
 use crate::ServiceError;
-pub use crate::model::ErrorData;
+pub use rmcp_types::ErrorData;
 #[deprecated(
     note = "Use `rmcp::ErrorData` instead, `rmcp::ErrorData` could become `RmcpError` in the future."
 )]
