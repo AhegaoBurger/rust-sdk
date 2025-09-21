@@ -27,9 +27,9 @@ pub fn tool_handler(attr: TokenStream, input: TokenStream) -> syn::Result<TokenS
     let tool_call_fn = quote! {
         async fn call_tool(
             &self,
-            request: rmcp_types::CallToolRequestParam,
+            request: rmcp::rmcp_types::CallToolRequestParam,
             context: rmcp::service::RequestContext<rmcp::RoleServer>,
-        ) -> Result<rmcp_types::CallToolResult, rmcp::ErrorData> {
+        ) -> Result<rmcp::rmcp_types::CallToolResult, rmcp::ErrorData> {
             let tcc = rmcp::handler::server::tool::ToolCallContext::new(self, request, context);
             #router.call(tcc).await
         }
@@ -37,10 +37,10 @@ pub fn tool_handler(attr: TokenStream, input: TokenStream) -> syn::Result<TokenS
     let tool_list_fn = quote! {
         async fn list_tools(
             &self,
-            _request: Option<rmcp_types::PaginatedRequestParam>,
+            _request: Option<rmcp::rmcp_types::PaginatedRequestParam>,
             _context: rmcp::service::RequestContext<rmcp::RoleServer>,
-        ) -> Result<rmcp_types::ListToolsResult, rmcp::ErrorData> {
-            Ok(rmcp_types::ListToolsResult::with_all_items(#router.list_all()))
+        ) -> Result<rmcp::rmcp_types::ListToolsResult, rmcp::ErrorData> {
+            Ok(rmcp::rmcp_types::ListToolsResult::with_all_items(#router.list_all()))
         }
     };
     let tool_call_fn = syn::parse2::<ImplItem>(tool_call_fn)?;

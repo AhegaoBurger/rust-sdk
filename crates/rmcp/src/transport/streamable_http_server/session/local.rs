@@ -16,7 +16,7 @@ use tracing::instrument;
 
 use crate::{
     RoleServer,
-    model::{
+    rmcp_types::{
         CancelledNotificationParam, ClientJsonRpcMessage, ClientNotification, ClientRequest,
         JsonRpcNotification, JsonRpcRequest, Notification, ProgressNotificationParam,
         ProgressToken, RequestId, ServerJsonRpcMessage, ServerNotification,

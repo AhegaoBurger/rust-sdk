@@ -124,8 +124,8 @@ impl ResolvedToolAttribute {
         let doc_attr: syn::Attribute = parse_quote!(#[doc = #doc_comment]);
         let tokens = quote! {
             #doc_attr
-            pub fn #fn_ident() -> rmcp_types::Tool {
-                rmcp_types::Tool {
+            pub fn #fn_ident() -> rmcp::rmcp_types::Tool {
+                rmcp::rmcp_types::Tool {
                     name: #name.into(),
                     title: #title,
                     description: #description,
@@ -223,7 +223,7 @@ pub fn tool(attr: TokenStream, input: TokenStream) -> syn::Result<TokenStream> {
         let idempotent_hint = wrap_option(idempotent_hint);
         let open_world_hint = wrap_option(open_world_hint);
         let token_stream = quote! {
-            Some(rmcp_types::ToolAnnotations {
+            Some(rmcp::rmcp_types::ToolAnnotations {
                 title: #title,
                 read_only_hint: #read_only_hint,
                 destructive_hint: #destructive_hint,

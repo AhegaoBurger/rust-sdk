@@ -95,6 +95,27 @@ impl IntoCallToolResult for Content {
     }
 }
 
+impl IntoCallToolResult for () {
+    fn into_call_tool_result(self) -> Result<CallToolResult, crate::ErrorData> {
+        Ok(CallToolResult::success(vec![]))
+    }
+}
+
+impl IntoCallToolResult for Result<CallToolResult, crate::ErrorData> {
+    fn into_call_tool_result(self) -> Result<CallToolResult, crate::ErrorData> {
+        self
+    }
+}
+
+impl IntoCallToolResult for Result<(), crate::ErrorData> {
+    fn into_call_tool_result(self) -> Result<CallToolResult, crate::ErrorData> {
+        match self {
+            Ok(()) => Ok(CallToolResult::success(vec![])),
+            Err(error) => Err(error),
+        }
+    }
+}
+
 // Specific Result implementations for common success/error patterns  
 // Note: This excludes ErrorData to avoid conflicts
 impl IntoCallToolResult for Result<String, String> {

@@ -5,7 +5,7 @@ use std::{any::TypeId, collections::HashMap, sync::Arc};
 use schemars::JsonSchema;
 
 use crate::{
-    RoleServer, model::JsonObject, schemars::generate::SchemaSettings, service::RequestContext,
+    RoleServer, rmcp_types::JsonObject, schemars::generate::SchemaSettings, service::RequestContext,
 };
 
 /// A shortcut for generating a JSON schema for a type.

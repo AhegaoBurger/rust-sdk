@@ -140,6 +140,30 @@ pub use error::{Error, ErrorData, RmcpError};
 /// Basic data types in MCP specification
 pub use rmcp_types as model;
 pub use rmcp_types;
+
+// Tool builder methods that depend on handler module
+#[cfg(feature = "server")]
+pub trait ToolBuilderExt {
+    /// Set the output schema using a type that implements JsonSchema
+    fn with_output_schema<T: schemars::JsonSchema + 'static>(self) -> Self;
+    /// Set the input schema using a type that implements JsonSchema  
+    fn with_input_schema<T: schemars::JsonSchema + 'static>(self) -> Self;
+}
+
+#[cfg(feature = "server")]
+impl ToolBuilderExt for rmcp_types::Tool {
+    fn with_output_schema<T: schemars::JsonSchema + 'static>(mut self) -> Self {
+        self.output_schema = Some(handler::server::common::cached_schema_for_type::<T>());
+        self
+    }
+
+    fn with_input_schema<T: schemars::JsonSchema + 'static>(mut self) -> Self {
+        self.input_schema = handler::server::common::cached_schema_for_type::<T>();
+        self
+    }
+}
+// Re-export the object! macro for convenience  
+pub use rmcp_types::object;
 #[cfg(any(feature = "client", feature = "server"))]
 #[cfg_attr(docsrs, doc(cfg(any(feature = "client", feature = "server"))))]
 pub mod service;

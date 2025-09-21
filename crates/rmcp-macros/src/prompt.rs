@@ -53,8 +53,8 @@ impl ResolvedPromptAttribute {
             quote! { None }
         };
         let tokens = quote! {
-            pub fn #fn_ident() -> rmcp_types::Prompt {
-                rmcp_types::Prompt {
+            pub fn #fn_ident() -> rmcp::rmcp_types::Prompt {
+                rmcp::rmcp_types::Prompt {
                     name: #name.into(),
                     description: #description,
                     arguments: #arguments,

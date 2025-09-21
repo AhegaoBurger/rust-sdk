@@ -14,7 +14,7 @@ pub use super::common::{Extension, RequestId};
 use crate::{
     RoleServer,
     handler::server::wrapper::Parameters,
-    model::{GetPromptResult, PromptMessage},
+    rmcp_types::{GetPromptResult, PromptMessage},
     service::RequestContext,
 };
 

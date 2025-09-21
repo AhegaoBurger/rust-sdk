@@ -63,7 +63,7 @@ http-body-util = { version = "0.1", optional = true }
 bytes = { version = "1", optional = true }
 # macro
 rmcp-macros = { workspace = true, optional = true }
-rmcp-types = { workspace = true, features = ["builders"] }
+rmcp-types = { workspace = true, features = ["builders", "macros", "elicitation", "schemars"] }
 [target.'cfg(not(all(target_family = "wasm", target_os = "unknown")))'.dependencies]
 chrono = { version = "0.4.38", features = ["serde"] }
 

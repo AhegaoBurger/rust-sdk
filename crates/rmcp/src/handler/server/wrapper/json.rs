@@ -51,3 +51,13 @@ impl<T: Serialize + JsonSchema + 'static> IntoCallToolResult for Result<Json<T>,
         }
     }
 }
+
+impl<T: Serialize + JsonSchema + 'static> IntoCallToolResult for Result<Json<T>, crate::ErrorData>
+{
+    fn into_call_tool_result(self) -> Result<CallToolResult, crate::ErrorData> {
+        match self {
+            Ok(value) => value.into_call_tool_result(),
+            Err(error) => Err(error),
+        }
+    }
+}
