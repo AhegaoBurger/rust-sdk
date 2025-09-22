@@ -1801,7 +1801,7 @@
     },
     "ServerCapabilities": {
       "title": "Builder",
-      "description": "```rust\n# use rmcp::model::ServerCapabilities;\nlet cap = ServerCapabilities::builder()\n    .enable_logging()\n    .enable_experimental()\n    .enable_prompts()\n    .enable_resources()\n    .enable_tools()\n    .enable_tool_list_changed()\n    .build();\n```",
+      "description": "```rust\n# use rmcp_types::model::ServerCapabilities;\nlet cap = ServerCapabilities::builder()\n    .enable_logging()\n    .enable_experimental()\n    .enable_prompts()\n    .enable_resources()\n    .enable_tools()\n    .enable_tool_list_changed()\n    .build();\n```",
       "type": "object",
       "properties": {
         "completions": {

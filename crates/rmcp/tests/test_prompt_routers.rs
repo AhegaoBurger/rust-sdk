@@ -4,7 +4,7 @@ use futures::future::BoxFuture;
 use rmcp::{
     ServerHandler,
     handler::server::wrapper::Parameters,
-    model::{GetPromptResult, PromptMessage, PromptMessageRole},
+    rmcp_types::{GetPromptResult, PromptMessage, PromptMessageRole},
 };
 
 #[derive(Debug, Default)]

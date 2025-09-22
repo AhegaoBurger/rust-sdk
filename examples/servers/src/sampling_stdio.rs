@@ -3,7 +3,7 @@ use std::sync::Arc;
 use anyhow::Result;
 use rmcp::{
     ServerHandler, ServiceExt,
-    model::*,
+    rmcp_types::*,
     service::{RequestContext, RoleServer},
     transport::stdio,
 };

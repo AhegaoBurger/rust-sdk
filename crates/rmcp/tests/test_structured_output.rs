@@ -2,7 +2,7 @@
 use rmcp::{
     Json, ServerHandler,
     handler::server::{router::tool::ToolRouter, tool::IntoCallToolResult, wrapper::Parameters},
-    model::{CallToolResult, Content, Tool},
+    rmcp_types::{CallToolResult, Content, Tool},
     tool, tool_handler, tool_router,
 };
 use schemars::JsonSchema;

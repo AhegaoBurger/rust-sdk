@@ -4,7 +4,7 @@
 use rmcp::{
     ServerHandler,
     handler::server::wrapper::Parameters,
-    model::{GetPromptResult, Prompt, PromptMessage, PromptMessageRole},
+    rmcp_types::{GetPromptResult, Prompt, PromptMessage, PromptMessageRole},
     prompt,
 };
 use schemars::JsonSchema;

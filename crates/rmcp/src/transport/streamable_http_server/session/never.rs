@@ -4,7 +4,7 @@ use thiserror::Error;
 use super::{ServerSseMessage, SessionId, SessionManager};
 use crate::{
     RoleServer,
-    model::{ClientJsonRpcMessage, ServerJsonRpcMessage},
+    rmcp_types::{ClientJsonRpcMessage, ServerJsonRpcMessage},
     transport::Transport,
 };
 

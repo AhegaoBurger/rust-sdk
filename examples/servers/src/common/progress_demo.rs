@@ -6,7 +6,7 @@ use std::{
 
 use futures::Stream;
 use rmcp::{
-    ErrorData as McpError, RoleServer, ServerHandler, handler::server::tool::ToolRouter, model::*,
+    ErrorData as McpError, RoleServer, ServerHandler, handler::server::tool::ToolRouter, rmcp_types::*,
     service::RequestContext, tool, tool_handler, tool_router,
 };
 use serde_json::json;

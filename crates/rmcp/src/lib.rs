@@ -19,7 +19,7 @@
 //!
 //! ```rust
 //! use std::sync::Arc;
-//! use rmcp::{ErrorData as McpError, model::*, tool, tool_router, handler::server::tool::ToolRouter, model::{CallToolResult, Content}};
+//! use rmcp::{ErrorData as McpError, rmcp_types::*, tool, tool_router, handler::server::tool::ToolRouter, rmcp_types::{CallToolResult, Content}};
 //! use tokio::sync::Mutex;
 //!
 //! #[derive(Clone)]
@@ -104,7 +104,7 @@
 //!
 //! ```rust
 //! use anyhow::Result;
-//! use rmcp::{model::CallToolRequestParam, service::ServiceExt, transport::{TokioChildProcess, ConfigureCommandExt}};
+//! use rmcp::{rmcp_types::CallToolRequestParam, service::ServiceExt, transport::{TokioChildProcess, ConfigureCommandExt}};
 //! use tokio::process::Command;
 //!
 //! async fn client() -> Result<()> {

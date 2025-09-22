@@ -12,7 +12,7 @@ use super::{
 };
 use crate::{
     RoleClient,
-    model::{ClientJsonRpcMessage, ServerJsonRpcMessage},
+    rmcp_types::{ClientJsonRpcMessage, ServerJsonRpcMessage},
     transport::common::client_side_sse::SseAutoReconnectStream,
 };
 
@@ -99,7 +99,7 @@ type ServerMessageStream<C> = Pin<Box<SseAutoReconnectStream<SseClientReconnect<
 /// use rmcp::transport::sse_client::{SseClient, SseClientTransport, SseClientConfig};
 /// use std::sync::Arc;
 /// use futures::stream::BoxStream;
-/// use rmcp::model::ClientJsonRpcMessage;
+/// use rmcp::rmcp_types::ClientJsonRpcMessage;
 /// use sse_stream::{Sse, Error as SseError};
 /// use http::Uri;
 ///

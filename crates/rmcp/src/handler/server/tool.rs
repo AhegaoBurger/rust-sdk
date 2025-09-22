@@ -15,7 +15,7 @@ pub use super::{
 use crate::{
     RoleServer,
     handler::server::wrapper::Parameters,
-    model::{CallToolRequestParam, CallToolResult, Content, IntoContents, JsonObject},
+    rmcp_types::{CallToolRequestParam, CallToolResult, Content, IntoContents, JsonObject},
     service::RequestContext,
 };
 

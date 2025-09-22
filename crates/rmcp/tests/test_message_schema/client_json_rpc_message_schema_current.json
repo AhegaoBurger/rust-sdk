@@ -232,7 +232,7 @@
     },
     "ClientCapabilities": {
       "title": "Builder",
-      "description": "```rust\n# use rmcp::model::ClientCapabilities;\nlet cap = ClientCapabilities::builder()\n    .enable_experimental()\n    .enable_roots()\n    .enable_roots_list_changed()\n    .build();\n```",
+      "description": "```rust\n# use rmcp_types::model::ClientCapabilities;\nlet cap = ClientCapabilities::builder()\n    .enable_experimental()\n    .enable_roots()\n    .enable_roots_list_changed()\n    .build();\n```",
       "type": "object",
       "properties": {
         "elicitation": {

@@ -9,7 +9,7 @@ use tokio_util::sync::CancellationToken;
 use super::common::client_side_sse::{ExponentialBackoff, SseRetryPolicy, SseStreamReconnect};
 use crate::{
     RoleClient,
-    model::{ClientJsonRpcMessage, ServerJsonRpcMessage},
+    rmcp_types::{ClientJsonRpcMessage, ServerJsonRpcMessage},
     transport::{
         common::client_side_sse::SseAutoReconnectStream,
         worker::{Worker, WorkerQuitReason, WorkerSendRequest, WorkerTransport},
@@ -524,7 +524,7 @@ impl<C: StreamableHttpClient> Worker for StreamableHttpClientWorker<C> {
 /// };
 /// use std::sync::Arc;
 /// use futures::stream::BoxStream;
-/// use rmcp::model::ClientJsonRpcMessage;
+/// use rmcp::rmcp_types::ClientJsonRpcMessage;
 /// use sse_stream::{Sse, Error as SseError};
 ///
 /// #[derive(Clone)]
@@ -605,7 +605,7 @@ impl<C: StreamableHttpClient> StreamableHttpClientTransport<C> {
     /// };
     /// use std::sync::Arc;
     /// use futures::stream::BoxStream;
-    /// use rmcp::model::ClientJsonRpcMessage;
+    /// use rmcp::rmcp_types::ClientJsonRpcMessage;
     /// use sse_stream::{Sse, Error as SseError};
     ///
     /// // Define your custom client

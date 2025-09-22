@@ -12,7 +12,7 @@ use anyhow::Result;
 use rmcp::{
     ErrorData as McpError, RoleServer, ServerHandler, ServiceExt,
     handler::server::{router::prompt::PromptRouter, wrapper::Parameters},
-    model::*,
+    rmcp_types::*,
     prompt, prompt_handler, prompt_router,
     schemars::JsonSchema,
     service::RequestContext,

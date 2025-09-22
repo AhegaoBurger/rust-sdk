@@ -9,7 +9,7 @@ use std::sync::Arc;
 use rmcp::{
     ClientHandler, ServerHandler, ServiceExt,
     handler::server::{router::tool::ToolRouter, wrapper::Parameters},
-    model::{CallToolRequestParam, ClientInfo},
+    rmcp_types::{CallToolRequestParam, ClientInfo},
     tool, tool_handler, tool_router,
 };
 use schemars::JsonSchema;

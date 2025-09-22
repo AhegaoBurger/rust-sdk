@@ -5,7 +5,7 @@ use serde::Serialize;
 
 use crate::{
     handler::server::tool::IntoCallToolResult,
-    model::{CallToolResult, IntoContents},
+    rmcp_types::{CallToolResult, IntoContents},
 };
 
 /// Json wrapper for structured output

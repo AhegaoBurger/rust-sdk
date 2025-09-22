@@ -1,5 +1,5 @@
 mod tests {
-    use rmcp::model::{ClientJsonRpcMessage, ServerJsonRpcMessage};
+    use rmcp::rmcp_types::{ClientJsonRpcMessage, ServerJsonRpcMessage};
     use schemars::generate::SchemaSettings;
 
     fn compare_schemas(name: &str, actual: &str, expected_file: &str) {

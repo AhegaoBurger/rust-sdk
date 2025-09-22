@@ -17,7 +17,7 @@ use tracing::Instrument;
 
 use crate::{
     RoleServer, Service,
-    model::ClientJsonRpcMessage,
+    rmcp_types::ClientJsonRpcMessage,
     service::{RxJsonRpcMessage, TxJsonRpcMessage, serve_directly_with_ct},
     transport::common::server_side_http::{DEFAULT_AUTO_PING_INTERVAL, SessionId, session_id},
 };

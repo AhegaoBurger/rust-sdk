@@ -1,7 +1,7 @@
 use anyhow::Result;
 use rmcp::{
     ServiceExt,
-    model::{CallToolRequestParam, GetPromptRequestParam, ReadResourceRequestParam},
+    rmcp_types::{CallToolRequestParam, GetPromptRequestParam, ReadResourceRequestParam},
     object,
     transport::{ConfigureCommandExt, TokioChildProcess},
 };

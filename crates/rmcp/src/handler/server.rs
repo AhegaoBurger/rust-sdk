@@ -1,6 +1,6 @@
 use crate::{
     error::ErrorData as McpError,
-    model::*,
+    rmcp_types::*,
     service::{NotificationContext, RequestContext, RoleServer, Service, ServiceRole},
 };
 

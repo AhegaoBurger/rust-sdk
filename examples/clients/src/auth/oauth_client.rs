@@ -9,7 +9,7 @@ use axum::{
 };
 use rmcp::{
     ServiceExt,
-    model::ClientInfo,
+    rmcp_types::ClientInfo,
     transport::{
         SseClientTransport,
         auth::{AuthClient, OAuthState},

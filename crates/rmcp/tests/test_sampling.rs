@@ -6,7 +6,7 @@ use anyhow::Result;
 use common::handlers::{TestClientHandler, TestServer};
 use rmcp::{
     ServiceExt,
-    model::*,
+    rmcp_types::*,
     service::{RequestContext, Service},
 };
 use tokio_util::sync::CancellationToken;

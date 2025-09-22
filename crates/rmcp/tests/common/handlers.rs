@@ -5,7 +5,7 @@ use std::{
 
 use rmcp::{
     ClientHandler, ErrorData as McpError, RoleClient, RoleServer, ServerHandler,
-    model::*,
+    rmcp_types::*,
     service::{NotificationContext, RequestContext},
 };
 use serde_json::json;

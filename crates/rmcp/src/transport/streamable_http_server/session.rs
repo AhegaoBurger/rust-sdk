@@ -3,7 +3,7 @@ use futures::Stream;
 pub use crate::transport::common::server_side_http::SessionId;
 use crate::{
     RoleServer,
-    model::{ClientJsonRpcMessage, ServerJsonRpcMessage},
+    rmcp_types::{ClientJsonRpcMessage, ServerJsonRpcMessage},
     transport::common::server_side_http::ServerSseMessage,
 };
 

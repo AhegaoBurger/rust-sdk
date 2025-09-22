@@ -6,7 +6,7 @@ use tool::{IntoToolRoute, ToolRoute};
 use super::ServerHandler;
 use crate::{
     RoleServer, Service,
-    model::{ClientRequest, ListPromptsResult, ListToolsResult, ServerResult},
+    rmcp_types::{ClientRequest, ListPromptsResult, ListToolsResult, ServerResult},
     service::NotificationContext,
 };
 

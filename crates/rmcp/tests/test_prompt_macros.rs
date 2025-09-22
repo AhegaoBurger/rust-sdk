@@ -5,7 +5,7 @@ use std::sync::Arc;
 use rmcp::{
     ClientHandler, RoleServer, ServerHandler, ServiceExt,
     handler::server::{router::prompt::PromptRouter, wrapper::Parameters},
-    model::{
+    rmcp_types::{
         ClientInfo, GetPromptRequestParam, GetPromptResult, ListPromptsResult,
         PaginatedRequestParam, PromptMessage, PromptMessageRole,
     },
@@ -167,7 +167,7 @@ async fn test_prompt_macros_with_generics() {
     assert!(result.description.is_some());
     assert_eq!(result.messages.len(), 2);
     match &result.messages[1].content {
-        rmcp::model::PromptMessageContent::Text { text } => {
+        rmcp::rmcp_types::PromptMessageContent::Text { text } => {
             assert!(text.contains("mock context data"));
         }
         _ => panic!("Expected text content"),
@@ -342,7 +342,7 @@ async fn test_optional_i64_field_with_null_input() -> anyhow::Result<()> {
         .await?;
 
     let result_text = match &result.messages.first().unwrap().content {
-        rmcp::model::PromptMessageContent::Text { text } => text.as_str(),
+        rmcp::rmcp_types::PromptMessageContent::Text { text } => text.as_str(),
         _ => panic!("Expected text content"),
     };
 
@@ -368,7 +368,7 @@ async fn test_optional_i64_field_with_null_input() -> anyhow::Result<()> {
         .await?;
 
     let some_result_text = match &some_result.messages.first().unwrap().content {
-        rmcp::model::PromptMessageContent::Text { text } => text.as_str(),
+        rmcp::rmcp_types::PromptMessageContent::Text { text } => text.as_str(),
         _ => panic!("Expected text content"),
     };
 

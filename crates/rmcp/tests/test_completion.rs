@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use rmcp::model::*;
+use rmcp::rmcp_types::*;
 use serde_json::json;
 
 #[test]

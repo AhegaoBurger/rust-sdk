@@ -1,5 +1,5 @@
 /// Integration tests for resource_link support in both tools and prompts
-use rmcp::model::{
+use rmcp::rmcp_types::{
     AnnotateAble, CallToolResult, Content, PromptMessage, PromptMessageContent, PromptMessageRole,
     RawResource, Resource,
 };

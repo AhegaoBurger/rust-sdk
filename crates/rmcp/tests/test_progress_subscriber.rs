@@ -2,7 +2,7 @@ use futures::StreamExt;
 use rmcp::{
     ClientHandler, Peer, RoleServer, ServerHandler, ServiceExt,
     handler::{client::progress::ProgressDispatcher, server::tool::ToolRouter},
-    model::{CallToolRequestParam, ClientRequest, Meta, ProgressNotificationParam, Request},
+    rmcp_types::{CallToolRequestParam, ClientRequest, Meta, ProgressNotificationParam, Request},
     service::PeerRequestOptions,
     tool, tool_handler, tool_router,
 };
@@ -29,7 +29,7 @@ impl Default for MyClient {
 impl ClientHandler for MyClient {
     async fn on_progress(
         &self,
-        params: rmcp::model::ProgressNotificationParam,
+        params: rmcp::rmcp_types::ProgressNotificationParam,
         _context: rmcp::service::NotificationContext<rmcp::RoleClient>,
     ) {
         tracing::info!("Received progress notification: {:?}", params);

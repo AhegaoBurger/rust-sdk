@@ -5,7 +5,7 @@ use reqwest::header::ACCEPT;
 use sse_stream::{Sse, SseStream};
 
 use crate::{
-    model::{ClientJsonRpcMessage, ServerJsonRpcMessage},
+    rmcp_types::{ClientJsonRpcMessage, ServerJsonRpcMessage},
     transport::{
         common::http_header::{
             EVENT_STREAM_MIME_TYPE, HEADER_LAST_EVENT_ID, HEADER_SESSION_ID, JSON_MIME_TYPE,

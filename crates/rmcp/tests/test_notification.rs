@@ -2,7 +2,7 @@ use std::sync::Arc;
 
 use rmcp::{
     ClientHandler, ServerHandler, ServiceExt,
-    model::{
+    rmcp_types::{
         ResourceUpdatedNotificationParam, ServerCapabilities, ServerInfo, SubscribeRequestParam,
     },
 };
@@ -25,7 +25,7 @@ impl ServerHandler for Server {
 
     async fn subscribe(
         &self,
-        request: rmcp::model::SubscribeRequestParam,
+        request: rmcp::rmcp_types::SubscribeRequestParam,
         context: rmcp::service::RequestContext<rmcp::RoleServer>,
     ) -> Result<(), rmcp::ErrorData> {
         let uri = request.uri;
@@ -54,7 +54,7 @@ pub struct Client {
 impl ClientHandler for Client {
     async fn on_resource_updated(
         &self,
-        params: rmcp::model::ResourceUpdatedNotificationParam,
+        params: rmcp::rmcp_types::ResourceUpdatedNotificationParam,
         _context: rmcp::service::NotificationContext<rmcp::RoleClient>,
     ) {
         let uri = params.uri;

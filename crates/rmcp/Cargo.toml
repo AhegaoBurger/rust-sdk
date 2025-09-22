@@ -158,6 +158,11 @@ required-features = ["server", "client"]
 path = "tests/test_tool_macros.rs"
 
 [[test]]
+name = "test_prompt_macros"
+required-features = ["server", "client"]
+path = "tests/test_prompt_macros.rs"
+
+[[test]]
 name = "test_with_python"
 required-features = [
   "reqwest",

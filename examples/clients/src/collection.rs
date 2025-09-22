@@ -6,7 +6,7 @@ use std::collections::HashMap;
 
 use anyhow::Result;
 use rmcp::{
-    model::CallToolRequestParam,
+    rmcp_types::CallToolRequestParam,
     service::ServiceExt,
     transport::{ConfigureCommandExt, TokioChildProcess},
 };

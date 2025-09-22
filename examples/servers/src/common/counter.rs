@@ -7,7 +7,7 @@ use rmcp::{
         router::{prompt::PromptRouter, tool::ToolRouter},
         wrapper::Parameters,
     },
-    model::*,
+    rmcp_types::*,
     prompt, prompt_handler, prompt_router, schemars,
     service::RequestContext,
     tool, tool_handler, tool_router,
@@ -300,7 +300,7 @@ mod tests {
             RequestContext {
                 meta: Default::default(),
                 ct: tokio_util::sync::CancellationToken::new(),
-                id: rmcp::model::NumberOrString::String("test-1".to_string()),
+                id: rmcp::rmcp_types::NumberOrString::String("test-1".to_string()),
                 peer: Default::default(),
                 extensions: Default::default(),
             },

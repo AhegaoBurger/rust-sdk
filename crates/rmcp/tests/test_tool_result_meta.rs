@@ -1,4 +1,4 @@
-use rmcp::model::{CallToolResult, Content, Meta};
+use rmcp::rmcp_types::{CallToolResult, Content, Meta};
 use serde_json::{Value, json};
 
 #[test]

@@ -6,7 +6,7 @@ use rmcp::{
         router::tool::ToolRouter,
         wrapper::{Json, Parameters},
     },
-    model::{ServerCapabilities, ServerInfo},
+    rmcp_types::{ServerCapabilities, ServerInfo},
     schemars, tool, tool_handler, tool_router,
 };
 

@@ -1,4 +1,4 @@
-use rmcp::model::{AnnotateAble, Content, Meta, RawContent, ResourceContents};
+use rmcp::rmcp_types::{AnnotateAble, Content, Meta, RawContent, ResourceContents};
 use serde_json::json;
 
 #[test]
@@ -11,7 +11,7 @@ fn serialize_embedded_text_resource_with_meta() {
     let mut resource_meta = Meta::new();
     resource_meta.insert("top".to_string(), json!(1));
 
-    let content: Content = RawContent::Resource(rmcp::model::RawEmbeddedResource {
+    let content: Content = RawContent::Resource(rmcp::rmcp_types::RawEmbeddedResource {
         meta: Some(resource_meta),
         resource: ResourceContents::TextResourceContents {
             uri: "str://example".to_string(),
@@ -40,7 +40,7 @@ fn serialize_embedded_text_resource_with_meta() {
 
 #[test]
 fn serialize_embedded_text_resource_without_meta_omits_fields() {
-    let content: Content = RawContent::Resource(rmcp::model::RawEmbeddedResource {
+    let content: Content = RawContent::Resource(rmcp::rmcp_types::RawEmbeddedResource {
         meta: None,
         resource: ResourceContents::TextResourceContents {
             uri: "str://no-meta".to_string(),
@@ -103,7 +103,7 @@ fn serialize_embedded_blob_resource_with_meta() {
     let mut resource_meta = Meta::new();
     resource_meta.insert("blob_top".to_string(), json!("t"));
 
-    let content: Content = RawContent::Resource(rmcp::model::RawEmbeddedResource {
+    let content: Content = RawContent::Resource(rmcp::rmcp_types::RawEmbeddedResource {
         meta: Some(resource_meta),
         resource: ResourceContents::BlobResourceContents {
             uri: "str://blob".to_string(),

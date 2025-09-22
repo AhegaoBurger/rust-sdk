@@ -1,7 +1,7 @@
 use anyhow::Result;
 use rmcp::{
     ClientHandler, ServiceExt,
-    model::*,
+    rmcp_types::*,
     object,
     service::{RequestContext, RoleClient},
     transport::{ConfigureCommandExt, TokioChildProcess},

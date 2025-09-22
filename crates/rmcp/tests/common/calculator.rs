@@ -2,7 +2,7 @@
 use rmcp::{
     ServerHandler,
     handler::server::{router::tool::ToolRouter, wrapper::Parameters},
-    model::{ServerCapabilities, ServerInfo},
+    rmcp_types::{ServerCapabilities, ServerInfo},
     schemars, tool, tool_router,
 };
 #[derive(Debug, serde::Deserialize, schemars::JsonSchema)]

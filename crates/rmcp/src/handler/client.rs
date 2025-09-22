@@ -1,7 +1,7 @@
 pub mod progress;
 use crate::{
     error::ErrorData as McpError,
-    model::*,
+    rmcp_types::*,
     service::{NotificationContext, RequestContext, RoleClient, Service, ServiceRole},
 };
 

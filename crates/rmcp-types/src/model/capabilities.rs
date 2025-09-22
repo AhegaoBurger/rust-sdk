@@ -61,7 +61,7 @@ pub struct ElicitationCapability {
 ///
 /// # Builder
 /// ```rust
-/// # use rmcp_types::model::ClientCapabilities;
+/// # use rmcp::model::ClientCapabilities;
 /// let cap = ClientCapabilities::builder()
 ///     .enable_experimental()
 ///     .enable_roots()
@@ -85,7 +85,7 @@ pub struct ClientCapabilities {
 ///
 /// ## Builder
 /// ```rust
-/// # use rmcp_types::model::ServerCapabilities;
+/// # use rmcp::model::ServerCapabilities;
 /// let cap = ServerCapabilities::builder()
 ///     .enable_logging()
 ///     .enable_experimental()

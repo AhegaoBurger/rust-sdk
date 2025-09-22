@@ -1,6 +1,6 @@
 use rmcp::{
     RmcpError,
-    model::CallToolRequestParam,
+    rmcp_types::CallToolRequestParam,
     service::ServiceExt,
     transport::{ConfigureCommandExt, TokioChildProcess},
 };

@@ -4,7 +4,7 @@ use anyhow::Result;
 use async_trait::async_trait;
 use rmcp::{
     RoleClient,
-    model::{CallToolRequestParam, CallToolResult, Tool as McpTool},
+    rmcp_types::{CallToolRequestParam, CallToolResult, Tool as McpTool},
     service::{RunningService, ServerSink},
 };
 use serde_json::Value;

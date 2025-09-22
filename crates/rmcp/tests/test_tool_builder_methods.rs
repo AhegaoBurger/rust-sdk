@@ -1,5 +1,5 @@
 //cargo test --test test_tool_builder_methods --features "client server macros"
-use rmcp::{ToolBuilderExt, model::{JsonObject, Tool}};
+use rmcp::{ToolBuilderExt, rmcp_types::{JsonObject, Tool}};
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
@@ -42,7 +42,7 @@ fn test_chained_builder_methods() {
     let tool = Tool::new("test", "Test tool", JsonObject::new())
         .with_input_schema::<InputData>()
         .with_output_schema::<OutputData>()
-        .annotate(rmcp::model::ToolAnnotations::new().read_only(true));
+        .annotate(rmcp::rmcp_types::ToolAnnotations::new().read_only(true));
 
     assert!(tool.output_schema.is_some());
     assert!(tool.annotations.is_some());

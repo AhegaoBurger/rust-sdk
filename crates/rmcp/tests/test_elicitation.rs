@@ -1,6 +1,6 @@
 //cargo test --test test_elicitation --features "client server"
 
-use rmcp::{model::*, service::*};
+use rmcp::{rmcp_types::*, service::*};
 // For typed elicitation tests
 #[cfg(feature = "schemars")]
 use schemars::JsonSchema;
@@ -291,7 +291,7 @@ async fn test_elicitation_performance() {
 /// Ensures that elicitation capability can be properly configured and serialized
 #[tokio::test]
 async fn test_elicitation_capabilities() {
-    use rmcp::model::{ClientCapabilities, ElicitationCapability};
+    use rmcp::rmcp_types::{ClientCapabilities, ElicitationCapability};
 
     // Test basic elicitation capability
     let mut elicitation_cap = ElicitationCapability::default();
@@ -645,7 +645,7 @@ mod typed_elicitation_tests {
 #[cfg(all(feature = "client", feature = "server"))]
 #[tokio::test]
 async fn test_elicitation_direction_server_to_client() {
-    use rmcp::model::*;
+    use rmcp::rmcp_types::*;
     use serde_json::json;
 
     // Test that server can create elicitation requests
@@ -694,7 +694,7 @@ async fn test_elicitation_direction_server_to_client() {
 #[cfg(all(feature = "client", feature = "server"))]
 #[tokio::test]
 async fn test_elicitation_json_rpc_direction() {
-    use rmcp::model::*;
+    use rmcp::rmcp_types::*;
     use serde_json::json;
 
     let schema = json!({
@@ -748,7 +748,7 @@ async fn test_elicitation_json_rpc_direction() {
 #[cfg(all(feature = "client", feature = "server"))]
 #[tokio::test]
 async fn test_elicitation_actions_compliance() {
-    use rmcp::model::*;
+    use rmcp::rmcp_types::*;
 
     // Test all three elicitation actions according to MCP spec
     let actions = [
@@ -788,7 +788,7 @@ async fn test_elicitation_actions_compliance() {
 /// Test that CreateElicitationResult IS in ClientResult (response compliance)
 #[tokio::test]
 async fn test_elicitation_result_in_client_result() {
-    use rmcp::model::*;
+    use rmcp::rmcp_types::*;
 
     // Test that clients can return elicitation results
     let result = ClientResult::CreateElicitationResult(CreateElicitationResult {
@@ -1046,7 +1046,7 @@ async fn test_elicitation_error_variants() {
 /// Test ElicitationCapability serialization with schema validation
 #[tokio::test]
 async fn test_elicitation_capability_serialization() {
-    use rmcp::model::ElicitationCapability;
+    use rmcp::rmcp_types::ElicitationCapability;
 
     // Test default capability (no schema validation)
     let default_cap = ElicitationCapability::default();
@@ -1093,7 +1093,7 @@ async fn test_elicitation_capability_serialization() {
 /// Test ClientCapabilities builder with elicitation capability methods
 #[tokio::test]
 async fn test_client_capabilities_elicitation_builder() {
-    use rmcp::model::{ClientCapabilities, ElicitationCapability};
+    use rmcp::rmcp_types::{ClientCapabilities, ElicitationCapability};
 
     // Test enabling elicitation capability
     let caps = ClientCapabilities::builder().enable_elicitation().build();
@@ -1316,7 +1316,7 @@ async fn test_realistic_timeout_scenarios() {
 /// Test that different ElicitationAction values map to correct error types
 #[tokio::test]
 async fn test_elicitation_action_error_mapping() {
-    use rmcp::{model::ElicitationAction, service::ElicitationError};
+    use rmcp::{rmcp_types::ElicitationAction, service::ElicitationError};
 
     // Test that each action type produces the expected error
     let test_cases = vec![
@@ -1347,7 +1347,7 @@ async fn test_elicitation_action_error_mapping() {
 /// Test elicitation action semantics according to MCP specification
 #[tokio::test]
 async fn test_elicitation_action_semantics() {
-    use rmcp::model::ElicitationAction;
+    use rmcp::rmcp_types::ElicitationAction;
 
     // According to MCP spec:
     // - Accept: User explicitly approved and submitted with data

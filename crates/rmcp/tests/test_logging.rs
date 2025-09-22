@@ -6,7 +6,7 @@ use std::sync::{Arc, Mutex};
 use common::handlers::{TestClientHandler, TestServer};
 use rmcp::{
     ServiceExt,
-    model::{LoggingLevel, LoggingMessageNotificationParam, SetLevelRequestParam},
+    rmcp_types::{LoggingLevel, LoggingMessageNotificationParam, SetLevelRequestParam},
 };
 use serde_json::json;
 use tokio::sync::Notify;

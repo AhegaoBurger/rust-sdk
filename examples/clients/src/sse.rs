@@ -1,7 +1,7 @@
 use anyhow::Result;
 use rmcp::{
     ServiceExt,
-    model::{CallToolRequestParam, ClientCapabilities, ClientInfo, Implementation},
+    rmcp_types::{CallToolRequestParam, ClientCapabilities, ClientInfo, Implementation},
     transport::SseClientTransport,
 };
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};

@@ -7,7 +7,7 @@ use anyhow::Result;
 use clap::{Parser, ValueEnum};
 use rmcp::{
     ClientHandler, ServiceExt,
-    model::{
+    rmcp_types::{
         CallToolRequestParam, ClientCapabilities, ClientInfo, Implementation,
         ProgressNotificationParam,
     },

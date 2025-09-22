@@ -1,4 +1,4 @@
-use rmcp::model::{CallToolResult, Content, RawResource};
+use rmcp::rmcp_types::{CallToolResult, Content, RawResource};
 
 #[test]
 fn test_resource_link_in_tool_result() {

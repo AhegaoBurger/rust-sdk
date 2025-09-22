@@ -8,7 +8,7 @@ use anyhow::Result;
 use rmcp::{
     ErrorData as McpError, ServerHandler, ServiceExt, elicit_safe,
     handler::server::{router::tool::ToolRouter, wrapper::Parameters},
-    model::*,
+    rmcp_types::*,
     schemars::JsonSchema,
     service::{RequestContext, RoleServer},
     tool, tool_handler, tool_router,

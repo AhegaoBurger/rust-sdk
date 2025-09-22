@@ -1,5 +1,5 @@
 use rmcp::{
-    ErrorData as McpError, handler::server::wrapper::Parameters, model::*, schemars, tool,
+    ErrorData as McpError, handler::server::wrapper::Parameters, rmcp_types::*, schemars, tool,
     tool_router,
 };
 use serde::{Deserialize, Serialize};
